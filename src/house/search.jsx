@@ -1,7 +1,7 @@
 import * as React from 'react';
 import HouseRow from './houserow';
   /*
-     This component will use the stateful searchTerm from the 
+     This component will use the stateful searchStateFulVar from the 
    search component to filter the houseArray by their "country"
    property in the App component before they are passed as 
    props to the HouseList component
@@ -9,7 +9,7 @@ import HouseRow from './houserow';
 
   //There is a callback function in the App component called "searchHandler". 
   //This handler is passed as prop to SearchComponent when it is instantiated
-  //in App component. The useState for this component is defined in App 
+  //in App component. The useState for this component is defined in App as well.
   //It looks like this:
   // const [searchTerm, setSearchTerm] = React.useState('');
   const Search = (props) => {   
@@ -19,12 +19,14 @@ import HouseRow from './houserow';
       
     //Note: onChange={props.onSearch} now has the value "searchHandler"
     //because it was passed as props and assigned to an HTML attribute 
-    //called "onSearch" when Search component was instantiated.
+    //called "onSearch" when Search component was instantiated in App
     return(
-    <div class="float-start ">
+    <div className="float-start ">
         <label htmlFor="search">Search:</label>
-        <input id="search"  type="text" onChange={props.onSearch}/> 
-       
+        <input id="search" 
+          value={props.search}
+          type="text"
+          onChange={props.onSearch}/> 
      </div>
     )
   };

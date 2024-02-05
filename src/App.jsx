@@ -40,7 +40,7 @@ const App = () => {
    };
 
    //Will move the houseArray from global scope into App Component
-   const houseArray = [
+   const housearray = [
     {
       id: 1,
       address: "12 Valley of Kings, Geneva",
@@ -50,7 +50,7 @@ const App = () => {
     {
       id: 2,
       address: "89 Road of Forks, Bern",
-      country: "Switzerland",
+      country: "Italy",
       price: 500000,
     },
     {
@@ -62,37 +62,49 @@ const App = () => {
   ];
   
 
-  /* This useState is one of the useState for Search Component
+  /* useState
+     This useState is one of the useState for Search Component
      If the App component is interested in the searchTerm state to 
      filter the stories, we will instantiate the state in the App 
      component instead of in the Search component
   */
-  const [searchState, setSearchTerm] = React.useState('');
+  const [stateOfSearchComponent, setSearchTerm] = React.useState('');
 
-  /*  This is the callback handler for the Search component. 
+  /*  callback handler
+   This is the callback handler for the Search component. 
    It receives the value that was passed by the Search component 
    whenever the user types something in the Search component. 
    For example when you type Tochi in the search input field 
    the target.value "Tochi" is passed to this callback handler.
      The handler then calls the state updater setSearchTerm()
    to update the searchState
-
    */
   const searchHandler = (event) => {
-    setSearchTerm(event.target.value); //store the value in the 
-                                     //state updater function - setSearchTerm.
+    setSearchTerm(event.target.value); //tell the state updater function
+                                       //setSearchTerm to update the stateOfSearchComponent.
     console.log('Value of data passed to parent component named App via  Callback Handler is = ' + event.target.value);
       };
 
+   //Add this function to filter the housearray before it is passed to
+   //HouseList component
+  
+   //select the record from the list based on the filter
+   //Here, the JavaScript array's built-in filter method is used 
+   //to create a new filtered array. The filter() method takes a function 
+   //as an argument, which accesses each item in the array and returns /
+   //true or false. If the function returns true, meaning the condition is 
+   //met, the item stays in the newly created array; if the function 
+   //returns false, it's removed from the filtered array.
 
-  /* 
-     1. First instantiate Search component passing the callback "handleSearch"
-        as props assigned to an html attribute called "onSearch"
+   const searchedHouses = housearray.filter((house) =>
+      //convert  to lowercase the filtered copy of HouseArray called "house" 
+      house.country.toLowerCase().includes(stateOfSearchComponent.toLowerCase()) 
+     );   
+    const myHouseStateAfterSearch = JSON.stringify(searchedHouses);
+    console.log("Value of searchedHouses= " + myHouseStateAfterSearch);
 
-     2. Second we'll pass a prop to HouseList component. The variable is called 
-        houseArray. When we instantiate the component it in line 94 it 
-        is assigned to the "list" HTML attribute */
-
+  //pass searchHandler as props but first assign it to HTML attribute called onSearch
+  //pass the searchedHouses to HouseList
   return (
     <>
      <Header  headerText={welcome} />   
@@ -100,7 +112,7 @@ const App = () => {
      <Search onSearch={searchHandler}/>  
       
      <hr/>
-     <HouseList list={houseArray} /> 
+     <HouseList list={searchedHouses} /> 
     </>
   )
 }
