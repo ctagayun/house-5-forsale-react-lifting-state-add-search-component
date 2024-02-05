@@ -27,6 +27,9 @@ import HouseRow from './houserow';
           value={props.search}
           type="text"
           onChange={props.onSearch}/> 
+        <p> 
+          Searching for <strong>{props.search}</strong>
+         </p>
      </div>
     )
   };

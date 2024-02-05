@@ -9,7 +9,7 @@ const subtitleStyle = {
 
 const Header = (props) => {
    
-  console.log("Props= " + props.headerText.title + props.headerText.title);
+  //console.log("Props= " + props.headerText.title + props.headerText.title);
   return (
     <header className="row mb-4">
       <div className="col-2">

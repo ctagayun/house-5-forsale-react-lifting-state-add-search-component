@@ -34,8 +34,8 @@ const HouseList = (props) => {
  //set stateful houseState by using the props.list as initial value.
  const [houseState, setAddHouse] = React.useState(props.list); 
 
- const myHouseState = JSON.stringify(houseState);
- console.log("State of houseState before ADD = " + myHouseState);
+ //const myHouseState = JSON.stringify(houseState);
+ //console.log("State of houseState before ADD = " + myHouseState);
 
  /* Callback handler 
    for the onclick event of the "Add" button. Whenever the user clicks 
@@ -58,8 +58,8 @@ const HouseList = (props) => {
    
     //After adding a record the houseState still has the same 
     //number of records
-    const myHouseStateAfterAdd = JSON.stringify(houseState);
-    console.log("Initial state of houseState after ADD = " + myHouseStateAfterAdd);
+    //const myHouseStateAfterAdd = JSON.stringify(houseState);
+    //console.log("Initial state of houseState after ADD = " + myHouseStateAfterAdd);
   };
 
   return (
@@ -79,7 +79,7 @@ const HouseList = (props) => {
           </tr>
         </thead>
         <tbody>
-          {houseState.map((record) => ( //first time in houseState has already been populated by useState
+          {props.list.map((record) => ( //first time in list has already been populated by useState
             //Instantiate the HouseRow component and pass each record
             //to HouseRow component as props.
             //house={record} means access of the "record"  and 

@@ -34,7 +34,6 @@ import Search from './house/search';
 const App = () => {
 
    const welcome = {
-    
      subject: 'List of',
      title: 'Houses for Sale',
    };
@@ -61,6 +60,7 @@ const App = () => {
     },
   ];
   
+  console.log('A- App component is rendered. This renders only on first rendering of the App')
 
   /* useState
      This useState is one of the useState for Search Component
@@ -68,7 +68,7 @@ const App = () => {
      filter the stories, we will instantiate the state in the App 
      component instead of in the Search component
   */
-  const [stateOfSearchComponent, setSearchTerm] = React.useState('');
+  const [stateOfSearchComponent, setSearchTerm] = React.useState('USA');
 
   /*  callback handler
    This is the callback handler for the Search component. 
@@ -82,7 +82,8 @@ const App = () => {
   const searchHandler = (event) => {
     setSearchTerm(event.target.value); //tell the state updater function
                                        //setSearchTerm to update the stateOfSearchComponent.
-    console.log('Value of data passed to parent component named App via  Callback Handler is = ' + event.target.value);
+      console.log('B - Value of data passed to parent component named App via ' +
+         'Callback Handler is = ' + event.target.value);
       };
 
    //Add this function to filter the housearray before it is passed to
@@ -99,17 +100,18 @@ const App = () => {
    const searchedHouses = housearray.filter((house) =>
       //convert  to lowercase the filtered copy of HouseArray called "house" 
       house.country.toLowerCase().includes(stateOfSearchComponent.toLowerCase()) 
-     );   
-    const myHouseStateAfterSearch = JSON.stringify(searchedHouses);
-    console.log("Value of searchedHouses= " + myHouseStateAfterSearch);
+     );  
 
-  //pass searchHandler as props but first assign it to HTML attribute called onSearch
-  //pass the searchedHouses to HouseList
+    const myHouseStateAfterSearch = JSON.stringify(searchedHouses);
+    console.log(" C - Value of searchedHouses= " + myHouseStateAfterSearch);
+
+    //pass searchHandler as props but first assign it to HTML attribute called onSearch
+    //pass the searchedHouses to HouseList
   return (
     <>
      <Header  headerText={welcome} />   
 
-     <Search onSearch={searchHandler}/>  
+     <Search search={stateOfSearchComponent} onSearch={searchHandler}/>  
       
      <hr/>
      <HouseList list={searchedHouses} /> 
